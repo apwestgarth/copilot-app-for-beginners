@@ -110,6 +110,14 @@ select {
   border-radius: 24px;
 }
 
+.filters__helper {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 .filters label {
   display: grid;
   gap: 8px;

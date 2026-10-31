@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import type { ReadingStatus } from "../App";
 
 type BookFiltersProps = {
@@ -20,21 +20,31 @@ export function BookFilters({
   onGenreChange,
   onReadingStatusChange
 }: BookFiltersProps) {
+  const helperId = useId();
+
   return (
     <section className="filters" aria-label="Book filters">
+      <p className="filters__helper" id={helperId}>
+        Filters work together. Results and reading stats update automatically.
+      </p>
       <label>
-        Search
+        Search by title or author
         <input
           type="search"
+          aria-describedby={helperId}
           value={searchTerm}
-          placeholder="Search by title or author"
+          placeholder="Enter a title or author"
           onChange={(event) => onSearchTermChange(event.target.value)}
         />
       </label>
 
       <label>
         Genre
-        <select value={selectedGenre} onChange={(event) => onGenreChange(event.target.value)}>
+        <select
+          aria-describedby={helperId}
+          value={selectedGenre}
+          onChange={(event) => onGenreChange(event.target.value)}
+        >
           <option value="all">All genres</option>
           {genres.map((genre) => (
             <option key={genre} value={genre}>
@@ -45,8 +55,9 @@ export function BookFilters({
       </label>
 
       <label>
-        Status
+        Reading status
         <select
+          aria-describedby={helperId}
           value={readingStatus}
           onChange={(event) => onReadingStatusChange(event.target.value as ReadingStatus)}
         >
